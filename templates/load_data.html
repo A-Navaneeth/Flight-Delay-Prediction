@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Title -->
+    <h2 class="text-center title-text">📂 LOAD FLIGHT DATASET</h2>
+    <p class="text-center text-secondary description-text">
+        Upload a dataset to begin analyzing flight delays and visualizing insights.
+    </p>
+
+    <hr class="styled-divider">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- File Upload Section -->
+    <div class="upload-box">
+        <form action="{{ url_for('load_data') }}" method="post" enctype="multipart/form-data">
+            <label for="file-upload" class="custom-file-upload">
+                <i class="fas fa-upload"></i> Choose File
+            </label>
+            <input type="file" id="file-upload" class="form-control" name="file" required onchange="updateFileName()">
+            <span id="file-name" class="file-name text-light mt-2"></span> <!-- File Name Display -->
+            <button type="submit" class="btn btn-primary btn-lg">Load Dataset 🚀</button>
+        </form>
+    </div>
+
+    <!-- Preview Section (Commented Out) -->
+    <!--
+    <div class="text-center mt-4">
+        <button id="preview-btn" class="btn btn-success btn-lg">
+            <i class="fas fa-eye"></i> Preview Dataset
+        </button>
+    </div>
+
+    <div id="preview-container" class="mt-4 preview-box">
+        <div class="table-wrapper">
+            <div class="table-container">
+                <table id="dataset-table" class="table table-striped table-bordered"></table>
+            </div>
+        </div>
+    </div>
+    -->
+
+</div>
+
+<!-- JavaScript for File Name Display -->
+<script>
+// Function to Update File Name Display
+function updateFileName() {
+    var input = document.getElementById('file-upload');
+    var fileName = input.files.length > 0 ? input.files[0].name : "No file selected";
+    document.getElementById('file-name').innerText = "📁 Selected File: " + fileName;
+}
+
+/* Commented Out JavaScript for Previewing Dataset */
+/*
+document.getElementById("preview-btn").addEventListener("click", function() {
+    fetch("{{ url_for('preview_data') }}")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("preview-container").innerHTML = data;
+    })
+    .catch(error => {
+        console.error("Error loading preview:", error);
+    });
+});
+*/
+</script>
+
+<!-- Custom Styles -->
+<style>
+    /* General Page Styling */
+    body {
+        background: linear-gradient(to right, #141E30, #243B55);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Title Styling */
+    .title-text {
+        color: #FFD700;
+        text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .description-text {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #B0C4DE;
+    }
+
+    /* Divider */
+    .styled-divider {
+        border: 2px solid #FFD700;
+        width: 50%;
+        margin: auto;
+    }
+
+    /* Upload Box */
+    .upload-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+        margin-top: 20px;
+    }
+
+    /* File Upload */
+    .custom-file-upload {
+        display: inline-block;
+        padding: 12px 20px;
+        cursor: pointer;
+        background: #FFD700;
+        color: black;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: 0.3s ease-in-out;
+    }
+
+    .custom-file-upload:hover {
+        background: #FFC107;
+        transform: scale(1.05);
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .file-name {
+        font-size: 1rem;
+        font-weight: bold;
+        display: block;
+    }
+</style>
+
+{% endblock %}

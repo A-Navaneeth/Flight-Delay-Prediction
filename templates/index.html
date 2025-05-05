@@ -1,0 +1,155 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5 text-center">
+        <!-- Project Title -->
+        <h1 class="fw-bold display-3 title-text">Flight Delay Prediction With Priority Information of Weather and Non-Weather Features</h1>
+        <h2 class="fw-semibold subtitle-text">With Priority Information of Weather and Non-Weather Features</h2>
+        <p class="lead description-text">
+            An advanced AI-powered system that predicts flight delays based on crucial weather and operational factors.
+            This project integrates machine learning models to provide accurate insights for better travel planning.
+        </p>
+
+        <hr class="styled-divider">
+
+        <!-- Project Description -->
+        <div class="description-box mt-4">
+            <p>
+                Our system utilizes <strong>Machine Learning</strong> and <strong>Data Analytics</strong> to forecast potential flight delays.
+                By analyzing real-time weather conditions and airline operational parameters, we enhance travel efficiency and decision-making.
+            </p>
+            <p>
+                The model prioritizes <span class="highlight">Weather-Based Factors</span> and <span class="highlight">Operational Flight Factors</span>
+                to provide accurate delay predictions and risk assessments.
+            </p>
+            <a href="{{ url_for('visualize') }}" class="btn btn-glow mt-3">Explore Visualizations 🚀</a>
+        </div>
+
+        <hr class="styled-divider">
+
+        <!-- Team Section -->
+        <h3 class="mt-5 fw-bold team-heading">Meet Our Team 💡</h3>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card team-card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">👨‍💻 A. Navaneeth</h5>
+                        <p class="card-text">Data Preprocessing & Model Training.</p>
+                        <p class="text-muted"><strong>Reg. No:</strong> 21701A05A8</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card team-card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">👩‍💻 V. Mounika</h5>
+                        <p class="card-text">Developed Visualizations & User Interface.</p>
+                        <p class="text-muted"><strong>Reg. No:</strong> 21701A0595</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card team-card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">🧑‍💻 P. Nithesh Reddy</h5>
+                        <p class="card-text">Backend API Integration & Database.</p>
+                        <p class="text-muted"><strong>Reg. No:</strong> 21701A05B5</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card team-card shadow-lg">
+                    <div class="card-body">
+                        <h5 class="card-title">👩‍💻 S. Mubeena</h5>
+                        <p class="card-text">Prediction Logic & User Interactions.</p>
+                        <p class="text-muted"><strong>Reg. No:</strong> 22705A0519</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Styles -->
+    <style>
+        /* Gradient Background */
+        body {
+            background: linear-gradient(to right, #0F2027, #203A43, #2C5364);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Project Title */
+        .title-text {
+            color: #FFD700;
+            text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+            margin-bottom: 8px;
+        }
+
+        .subtitle-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #87CEEB;
+            text-shadow: 2px 2px 5px rgba(135, 206, 235, 0.6);
+        }
+
+        /* Description Box */
+        .description-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+            text-align: center;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        /* Styled Divider */
+        .styled-divider {
+            border: 2px solid #FFD700;
+            width: 50%;
+            margin: 20px auto;
+        }
+
+        /* Team Section */
+        .team-heading {
+            color: #FFD700;
+            text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.7);
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Highlighted Words */
+        .highlight {
+            color: #FFD700;
+            font-weight: bold;
+        }
+
+        /* Glowing Button */
+        .btn-glow {
+            background: #FFD700;
+            color: #000;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.6);
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .btn-glow:hover {
+            background: #FFC107;
+            box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.9);
+            transform: scale(1.05);
+        }
+    </style>
+{% endblock %}

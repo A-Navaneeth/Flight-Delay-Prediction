@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Title -->
+    <h2 class="text-center title-text">🤖 Train Classification Models</h2>
+
+    <p class="text-center text-secondary description-text">
+        Our system uses **three powerful classifiers** to predict flight delays based on weather and airline conditions.
+        <br><br>These include:
+    </p>
+
+    <ul class="list-group">
+        <li class="list-group-item">🌲 <strong>Random Forest Classifier</strong> – Uses multiple decision trees to improve accuracy.</li>
+        <li class="list-group-item">🛠️ <strong>Decision Tree Classifier</strong> – A tree-based model that makes sequential decisions.</li>
+        <li class="list-group-item">🔍 <strong>K-Nearest Neighbors (KNN)</strong> – Predicts delays based on the closest flights with similar conditions.</li>
+    </ul>
+
+    <hr class="styled-divider">
+
+    <!-- Train Model Button -->
+    <form action="{{ url_for('train_model') }}" method="post">
+        <button type="submit" class="btn btn-primary btn-lg shadow-sm">🚀 Train Model</button>
+    </form>
+
+    <!-- Display Best Model -->
+    {% if session['best_model'] %}
+    <div class="alert alert-success mt-4 shadow-lg">
+        🎯 **Best Model:** <strong>{{ session['best_model'] }}</strong>
+        <br>✅ Highest Accuracy: **{{ session['model_results'][session['best_model']] | round(4) }}**
+    </div>
+    {% endif %}
+
+    <!-- Display Model Accuracy Scores -->
+    {% if session['model_results'] %}
+    <div class="mt-4">
+        <h3>📊 Model Accuracy Scores</h3>
+        <table class="table table-bordered table-hover shadow-lg">
+            <thead class="table-dark">
+                <tr>
+                    <th>Model</th>
+                    <th>Accuracy</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for model, accuracy in session['model_results'].items() %}
+                <tr>
+                    <td>{{ model }}</td>
+                    <td>{{ accuracy | round(4) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    <!-- Display Classification Reports -->
+    {% if session['classification_reports'] %}
+    <div class="mt-4">
+        <h3>📜 Classification Reports</h3>
+
+        {% for model, report in session['classification_reports'].items() %}
+        <div class="card mt-3 shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title text-primary">📌 {{ model }} - Classification Report</h5>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Precision</th>
+                            <th>Recall</th>
+                            <th>F1-Score</th>
+                            <th>Support</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Delayed (1)</td>
+                            <td>{{ report['1']['precision'] | round(2) }}</td>
+                            <td>{{ report['1']['recall'] | round(2) }}</td>
+                            <td>{{ report['1']['f1-score'] | round(2) }}</td>
+                            <td>{{ report['1']['support'] }}</td>
+                        </tr>
+                        <tr>
+                            <td>On Time (0)</td>
+                            <td>{{ report['0']['precision'] | round(2) }}</td>
+                            <td>{{ report['0']['recall'] | round(2) }}</td>
+                            <td>{{ report['0']['f1-score'] | round(2) }}</td>
+                            <td>{{ report['0']['support'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+
+<!-- Custom Styles -->
+<style>
+    body {
+        background: linear-gradient(to right, #141E30, #243B55);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .title-text {
+        color: #FFD700;
+        text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .description-text {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #B0C4DE;
+    }
+
+    .styled-divider {
+        border: 2px solid #FFD700;
+        width: 50%;
+        margin: auto;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .card {
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Title Section -->
+    <h2 class="text-center fw-bold title-text">About the Flight Delay Prediction System</h2>
+    <p class="text-center description-text">An AI-powered system that predicts flight delays using historical flight data, weather conditions, and airline operational metrics.</p>
+
+    <hr class="styled-divider">
+
+    <!-- Features Section -->
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <p class="lead text-white">
+                ✈️ Our system uses <strong>machine learning</strong> to analyze flight and weather data, helping passengers and airlines optimize travel plans.
+            </p>
+
+            <div class="features-list">
+                <div class="feature-item">
+                    <span class="emoji">📊</span> Utilizes <strong>Machine Learning Models</strong> to predict delays.
+                </div>
+                <div class="feature-item">
+                    <span class="emoji">🌦️</span> Considers **Weather Factors** (temperature, precipitation, wind speed).
+                </div>
+                <div class="feature-item">
+                    <span class="emoji">🛫</span> Evaluates **Airline Carrier & Airport Traffic** impact.
+                </div>
+                <div class="feature-item">
+                    <span class="emoji">💡</span> Assists **Passengers & Airlines** with smarter scheduling.
+                </div>
+            </div>
+        </div>
+
+        <!-- Image Section -->
+        <div class="col-md-6 text-center">
+            <img src="{{ url_for('static', filename='images/flight_prediction.jpg') }}" class="img-fluid rounded shadow-lg flight-image" alt="Flight Delay Prediction">
+        </div>
+    </div>
+
+    <hr class="styled-divider">
+
+    <!-- How It Works Section -->
+    <h3 class="fw-bold text-center process-title">How It Works</h3>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-8">
+            <ul class="process-list">
+                <li class="process-item"><span class="emoji">📂</span> Load the **flights_2019.csv** dataset.</li>
+                <li class="process-item"><span class="emoji">⚙️</span> Preprocess data (handle missing values, format timestamps).</li>
+                <li class="process-item"><span class="emoji">📊</span> Visualize key insights like **average delays per airport**.</li>
+                <li class="process-item"><span class="emoji">🤖</span> Train a **Machine Learning Model** (Random Forest, KNN, Decision Tree).</li>
+                <li class="process-item"><span class="emoji">🔍</span> Get **real-time predictions** for upcoming flights.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Call-to-Action -->
+    <div class="text-center mt-5">
+        <a href="{{ url_for('load_data') }}" class="btn btn-glow btn-lg">Start Using the System 🚀</a>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* Dark-Themed Background */
+    body {
+        background: linear-gradient(to right, #141E30, #243B55);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Page Title */
+    .title-text {
+        color: #FFD700;
+        text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+
+    .description-text {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #B0C4DE;
+    }
+
+    /* Styled Divider */
+    .styled-divider {
+        border: 2px solid #FFD700;
+        width: 50%;
+        margin: auto;
+    }
+
+    /* Feature List */
+    .features-list {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .feature-item {
+        padding: 10px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #FFD700;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .feature-item:hover {
+        transform: translateX(10px);
+        color: #FFC107;
+    }
+
+    /* Image Styling */
+    .flight-image {
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .flight-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 8px 16px rgba(255, 215, 0, 0.6);
+    }
+
+    /* Process List */
+    .process-title {
+        color: #FFD700;
+        text-shadow: 2px 2px 8px rgba(255, 215, 0, 0.7);
+        text-transform: uppercase;
+    }
+
+    .process-list {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    .process-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin: 8px 0;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: background 0.3s, transform 0.3s;
+    }
+
+    .process-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: scale(1.02);
+    }
+
+    /* Emoji Styling */
+    .emoji {
+        font-size: 1.4rem;
+        margin-right: 8px;
+    }
+
+    /* Glowing Button */
+    .btn-glow {
+        background: #FFD700;
+        color: #000;
+        font-weight: bold;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(255, 215, 0, 0.6);
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+    }
+
+    .btn-glow:hover {
+        background: #FFC107;
+        box-shadow: 0px 0px 15px rgba(255, 215, 0, 0.9);
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}

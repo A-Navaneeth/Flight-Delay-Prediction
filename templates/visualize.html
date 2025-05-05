@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Page Title -->
+    <h2 class="text-center title-text">📊 Flight Delay Visualizations</h2>
+    <p class="text-center text-secondary description-text">
+        Explore various insights into flight delays, their distribution, and the key factors influencing them.
+    </p>
+
+    <hr class="styled-divider">
+
+    <div class="row">
+        <!-- Departure Delay Distribution -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">📉 Departure Delay Distribution</h5>
+                    <p class="card-text">This graph shows the frequency of departure delays in minutes.</p>
+                    <img src="{{ url_for('generate_plot', plot_type='departure_delay') }}" class="img-fluid rounded shadow" alt="Departure Delay">
+                </div>
+            </div>
+        </div>
+
+        <!-- Arrival Delay Distribution -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-danger">📈 Arrival Delay Distribution</h5>
+                    <p class="card-text">This graph shows the frequency of arrival delays in minutes.</p>
+                    <img src="{{ url_for('generate_plot', plot_type='arrival_delay') }}" class="img-fluid rounded shadow" alt="Arrival Delay">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Weather vs Departure Delay -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-warning">🌦️ Weather vs Departure Delay</h5>
+                    <p class="card-text">This scatter plot shows how precipitation affects departure delays.</p>
+                    <img src="{{ url_for('generate_plot', plot_type='weather_vs_delay') }}" class="img-fluid rounded shadow" alt="Weather vs Delay">
+                </div>
+            </div>
+        </div>
+
+        <!-- Airports with Highest Delays -->
+        <div class="col-md-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-success">🛫 Airports with Highest Delays</h5>
+                    <p class="card-text">This bar chart shows the top 10 airports with the highest average departure delays.</p>
+                    <img src="{{ url_for('generate_plot', plot_type='airport_vs_delay') }}" class="img-fluid rounded shadow" alt="Airport vs Delay">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Styles -->
+<style>
+    /* General Page Styling */
+    body {
+        background: linear-gradient(to right, #141E30, #243B55);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Title Styling */
+    .title-text {
+        color: #FFD700;
+        text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .description-text {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #B0C4DE;
+    }
+
+    /* Divider */
+    .styled-divider {
+        border: 2px solid #FFD700;
+        width: 50%;
+        margin: auto;
+    }
+
+    /* Card Styling */
+    .card {
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    /* Image Styling */
+    img {
+        border-radius: 8px;
+    }
+</style>
+
+{% endblock %}

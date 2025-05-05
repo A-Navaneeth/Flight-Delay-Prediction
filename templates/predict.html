@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Title -->
+    <h2 class="text-center title-text">🔍 Flight Delay Prediction</h2>
+
+    <p class="text-center text-secondary description-text">
+        Enter the **flight details** below, and our trained model will predict whether your flight will be **delayed or on time**.
+    </p>
+
+    <hr class="styled-divider">
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show text-center shadow-lg" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Prediction Form -->
+    <div class="card shadow-lg bg-dark text-white p-4">
+        <form method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="scheduled_elapsed_time" class="form-label">{{ form.scheduled_elapsed_time.label }}</label>
+                        {{ form.scheduled_elapsed_time(class="form-control", id="scheduled_elapsed_time") }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="temperature" class="form-label">{{ form.temperature.label }}</label>
+                        {{ form.temperature(class="form-control", id="temperature") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="precipitation" class="form-label">{{ form.precipitation.label }}</label>
+                        {{ form.precipitation(class="form-control", id="precipitation") }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="visibility" class="form-label">{{ form.visibility.label }}</label>
+                        {{ form.visibility(class="form-control", id="visibility") }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="wind_speed" class="form-label">{{ form.wind_speed.label }}</label>
+                {{ form.wind_speed(class="form-control", id="wind_speed") }}
+            </div>
+
+            <button type="submit" class="btn btn-lg btn-primary w-100 shadow-sm">🚀 Predict</button>
+        </form>
+    </div>
+
+    <!-- Display Prediction Result -->
+    <div class="mt-4 text-center">
+        {% if prediction %}
+            <div class="card bg-success text-white shadow-lg p-3">
+                <h3 class="text-center">🎯 Prediction Result:</h3>
+                <h2><span class="badge bg-warning text-dark">{{ prediction }}</span></h2>
+            </div>
+        {% else %}
+            <div class="card bg-secondary text-white shadow-lg p-3">
+                <h3 class="text-center">🤔 No Prediction Yet</h3>
+                <p>Submit the flight details to get a result.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Custom Styling -->
+<style>
+    body {
+        background: linear-gradient(to right, #141E30, #243B55);
+        color: white;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .title-text {
+        color: #FFD700;
+        text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    .description-text {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #B0C4DE;
+    }
+
+    .styled-divider {
+        border: 2px solid #FFD700;
+        width: 50%;
+        margin: auto;
+    }
+
+    .card {
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transition: 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+</style>
+
+{% endblock %}
